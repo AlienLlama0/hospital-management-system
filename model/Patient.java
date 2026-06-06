@@ -1,8 +1,14 @@
 package model;
 import enums.BloodGroup;
 
-abstract class Patient extends Person{
-    private BloodGroup bloodGroup;
-    private String emergencyContact;
-    private String emergencyName;
+public class Patient extends Person{
+    public String symptom;
+    public BloodGroup bloodGroup;
+    
+    public Patient(String id, String name, int age, String phone, String gender, String symptom, BloodGroup bloodGroup){
+        super(id, name, age, phone, gender);
+        
+        this.symptom = symptom;
+        this.bloodGroup = bloodGroup;
+    }
 }
