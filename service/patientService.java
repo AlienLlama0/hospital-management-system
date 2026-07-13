@@ -30,7 +30,7 @@ public class patientService {
         String id = Input.scanner.nextLine();
         Patient p = null;
         for(int i = 0;i < DataManager.patientList.size();i++){
-            if(id == DataManager.patientList.get(i).id){
+            if(id.equals(DataManager.patientList.get(i).id)){
                 p = DataManager.patientList.get(i);
                 break;
             }
@@ -51,21 +51,29 @@ public class patientService {
             case 1:
                 String name = Input.scanner.nextLine();
                 p.name = name;
+                break;
             case 2:
                 int age = Integer.parseInt(Input.scanner.nextLine());
                 p.age = age;
+                break;
             case 3:
                 String phone = Input.scanner.nextLine();
                 p.phone = phone;
+                break;
             case 4:
                 String gender = Input.scanner.nextLine();
                 p.gender = gender;
+                break;
             case 5:
                 String symptom = Input.scanner.nextLine();
                 p.symptom = symptom;
+                break;
             case 6:
                 String blood = Input.scanner.nextLine();
-                p.bloodGroup = BloodGroup.valueOf(blood);                  
+                p.bloodGroup = BloodGroup.valueOf(blood); 
+                break;
+            default:
+                break;                 
 
         }
     }
