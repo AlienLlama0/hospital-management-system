@@ -12,5 +12,7 @@ public class Main{
         DataManager.loadData();
         patientService.create();
         DataManager.showData();
+        patientService.update();
+        DataManager.showData();
     }
 }

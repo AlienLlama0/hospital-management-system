@@ -27,6 +27,46 @@ public class patientService {
        
     }
     public static void update(){
-        System.out.println("");
+        String id = Input.scanner.nextLine();
+        Patient p = null;
+        for(int i = 0;i < DataManager.patientList.size();i++){
+            if(id == DataManager.patientList.get(i).id){
+                p = DataManager.patientList.get(i);
+                break;
+            }
+        }
+        if(p == null){
+            System.out.println("Patient not found");
+            return;
+        }
+        System.out.println("1.Name");
+        System.out.println("2.AGE");
+        System.out.println("3.Phone");
+        System.out.println("4.Gender");
+        System.out.println("5.Symptom");
+        System.out.println("6.Blood Group");
+
+        int option = Integer.parseInt(Input.scanner.nextLine());
+        switch(option){
+            case 1:
+                String name = Input.scanner.nextLine();
+                p.name = name;
+            case 2:
+                int age = Integer.parseInt(Input.scanner.nextLine());
+                p.age = age;
+            case 3:
+                String phone = Input.scanner.nextLine();
+                p.phone = phone;
+            case 4:
+                String gender = Input.scanner.nextLine();
+                p.gender = gender;
+            case 5:
+                String symptom = Input.scanner.nextLine();
+                p.symptom = symptom;
+            case 6:
+                String blood = Input.scanner.nextLine();
+                p.bloodGroup = BloodGroup.valueOf(blood);                  
+
+        }
     }
 }
