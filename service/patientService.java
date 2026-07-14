@@ -23,11 +23,12 @@ public class patientService {
        BloodGroup bloodgroup = BloodGroup.valueOf(blood);
        
        Patient patient = new Patient(id,name,age,phone,gender,symptom, bloodgroup);
-       DataManager.patientList.add(patient);
        DataManager.addPatient(patient);
+       System.out.println("Patient id is created.\n");
     }
 
     public static void update(){
+        System.out.println("Enter you id please: ");
         String id = Input.scanner.nextLine();
         Patient p = null;
         for(int i = 0;i < DataManager.patientList.size();i++){
@@ -37,7 +38,7 @@ public class patientService {
             }
         }
         if(p == null){
-            System.out.println("Patient not found");
+            System.out.println("Patient is not found");
             return;
         }
         System.out.println("1.Name");
@@ -47,6 +48,7 @@ public class patientService {
         System.out.println("5.Symptom");
         System.out.println("6.Blood Group");
 
+        
         int option = Integer.parseInt(Input.scanner.nextLine());
         switch(option){
             case 1:
@@ -77,5 +79,28 @@ public class patientService {
                 break;
         }
         DataManager.updatePatient(p);
+        System.out.println("Patient id is updated.\n");
+    }
+    public static void read(){
+        System.out.println("Enter you id please: ");
+        String id = Input.scanner.nextLine();
+        Patient b = null;
+        for(int i = 0;i < DataManager.patientList.size();i++){
+            if(id.equals(DataManager.patientList.get(i).id)){
+                b = DataManager.patientList.get(i);
+                break;
+            }
+        }
+        if(b == null){
+            System.out.println("Patient is not found");
+            return;
+        }
+        DataManager.filterData(b);
+    }
+    public static void delete(){
+        System.out.println("Enter you id please: ");
+        String id = Input.scanner.nextLine();
+        DataManager.deletePatient(id);
+        System.out.println("id is deleted!!\n");
     }
 }

@@ -19,7 +19,7 @@ public class DataManager {
 
             while (rs.next()) {
                 Patient p = new Patient(
-                    rs.getString("id"),
+                    rs.getString("patient_id"),
                     rs.getString("name"),
                     rs.getInt("age"),
                     rs.getString("phone"),
@@ -37,7 +37,7 @@ public class DataManager {
     }
 
     public static void addPatient(Patient p) {
-        String sql = "INSERT INTO patient(id, name, age, phone, gender, symptom, blood_group) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO patient(patient_id, name, age, phone, gender, symptom, blood_group) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = Connect.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -63,7 +63,7 @@ public class DataManager {
         String sql = """
             UPDATE patient
             SET name = ?, age = ?, phone = ?, gender = ?, symptom = ?, blood_group = ?
-            WHERE id = ?
+            WHERE patient_id = ?
             """;
 
         try (Connection conn = Connect.getConnection();
@@ -92,7 +92,7 @@ public class DataManager {
     }
 
     public static void deletePatient(String id) {
-        String sql = "DELETE FROM patient WHERE id = ?";
+        String sql = "DELETE FROM patient WHERE patient_id = ?";
 
         try (Connection conn = Connect.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -114,6 +114,15 @@ public class DataManager {
         for(Patient p : patientList){
             System.out.printf("| %-5s | %-20s | %-5d | %-13s | %-8s | %-13s | %-13s |%n", p.id, p.name, p.age, p.phone, p.gender, p.symptom, p.bloodGroup);
         }
+        System.out.println("===================================================================================================");
+    }
+    public static void filterData(Patient p){
+        System.out.println("===================================================================================================");
+        System.out.printf("| %-5s | %-20s | %-5s | %-13s | %-8s | %-13s | %-13s |%n", "ID", "NAME", "AGE", "PHONE", "GENDER", "SYMPTOM", "BLOODGROUP");
+        System.out.println("===================================================================================================");
+        
+        System.out.printf("| %-5s | %-20s | %-5d | %-13s | %-8s | %-13s | %-13s |%n", p.id, p.name, p.age, p.phone, p.gender, p.symptom, p.bloodGroup);
+        
         System.out.println("===================================================================================================");
     }
 }

@@ -13,6 +13,7 @@ public class Connect {
         String createPatientSql = """
             CREATE TABLE IF NOT EXISTS patient (
                 id INTEGER PRIMARY KEY,
+                patient_id  TEXT UNIQUE NOT NULL,
                 name TEXT NOT NULL,
                 age REAL NOT NULL,
                 phone TEXT NOT NULL,
