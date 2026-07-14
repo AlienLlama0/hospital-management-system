@@ -24,8 +24,9 @@ public class patientService {
        
        Patient patient = new Patient(id,name,age,phone,gender,symptom, bloodgroup);
        DataManager.patientList.add(patient);
-       
+       DataManager.addPatient(patient);
     }
+
     public static void update(){
         String id = Input.scanner.nextLine();
         Patient p = null;
@@ -73,8 +74,8 @@ public class patientService {
                 p.bloodGroup = BloodGroup.valueOf(blood); 
                 break;
             default:
-                break;                 
-
+                break;
         }
+        DataManager.updatePatient(p);
     }
 }

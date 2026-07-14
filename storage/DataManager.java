@@ -1,7 +1,4 @@
 package storage;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import enums.BloodGroup;
@@ -33,6 +30,77 @@ public class DataManager {
 
                 patientList.add(p);
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addPatient(Patient p) {
+        String sql = "INSERT INTO patient(id, name, age, phone, gender, symptom, blood_group) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = Connect.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, p.id);
+            ps.setString(2, p.name);
+            ps.setInt(3, p.age);
+            ps.setString(4, p.phone);
+            ps.setString(5, p.gender);
+            ps.setString(6, p.symptom);
+            ps.setString(7, p.bloodGroup.name());
+
+            ps.executeUpdate();
+
+            patientList.add(p);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updatePatient(Patient p) {
+        String sql = """
+            UPDATE patient
+            SET name = ?, age = ?, phone = ?, gender = ?, symptom = ?, blood_group = ?
+            WHERE id = ?
+            """;
+
+        try (Connection conn = Connect.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, p.name);
+            ps.setInt(2, p.age);
+            ps.setString(3, p.phone);
+            ps.setString(4, p.gender);
+            ps.setString(5, p.symptom);
+            ps.setString(6, p.bloodGroup.name());
+            ps.setString(7, p.id);
+
+            ps.executeUpdate();
+
+            for (int i = 0; i < patientList.size(); i++) {
+                if (patientList.get(i).id.equals(p.id)) {
+                    patientList.set(i, p);
+                    break;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deletePatient(String id) {
+        String sql = "DELETE FROM patient WHERE id = ?";
+
+        try (Connection conn = Connect.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, id);
+            ps.executeUpdate();
+
+            patientList.removeIf(patient -> patient.id.equals(id));
 
         } catch (SQLException e) {
             e.printStackTrace();
