@@ -1,6 +1,7 @@
 package service;
 import util.Input;
 import storage.DataManager;
+import storage.PatientRepository;
 import model.Patient;
 import enums.BloodGroup;
 
@@ -23,7 +24,7 @@ public class patientService {
        BloodGroup bloodgroup = BloodGroup.valueOf(blood);
        
        Patient patient = new Patient(id,name,age,phone,gender,symptom, bloodgroup);
-       DataManager.addPatient(patient);
+       PatientRepository.addPatient(patient);
        System.out.println("Patient id is created.\n");
     }
 
@@ -78,7 +79,7 @@ public class patientService {
             default:
                 break;
         }
-        DataManager.updatePatient(p);
+        PatientRepository.updatePatient(p);
         System.out.println("Patient id is updated.\n");
     }
     public static void read(){
@@ -95,12 +96,12 @@ public class patientService {
             System.out.println("Patient is not found");
             return;
         }
-        DataManager.filterData(b);
+        PatientRepository.patientFilterData(b);
     }
     public static void delete(){
         System.out.println("Enter you id please: ");
         String id = Input.scanner.nextLine();
-        DataManager.deletePatient(id);
+        PatientRepository.deletePatient(id);
         System.out.println("id is deleted!!\n");
     }
 }
