@@ -20,13 +20,27 @@ public class Connect {
                 blood_group TEXT NOT NULL,
                 symptom TEXT NOT NULL,
                 gender TEXT NOT NULL CHECK (gender IN ('Male', 'Female'))
-            )
+            );
             """;
 
+        String createDoctorSql = """
+            CREATE TABLE IF NOT EXISTS doctor (
+                id INTEGER PRIMARY KEY,
+                doctor_id  TEXT UNIQUE NOT NULL,
+                name TEXT NOT NULL,
+                age REAL NOT NULL,
+                phone TEXT NOT NULL,
+                gender TEXT NOT NULL CHECK (gender IN ('Male', 'Female')),
+                specialization TEXT NOT NULL,
+                consultation_fee DECIMAL(10,2) NOT NULL
+            );
+            """;
+        
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {
 
             stmt.execute(createPatientSql);
+            stmt.execute(createDoctorSql);
 
         } catch (SQLException e) {
             e.printStackTrace();
