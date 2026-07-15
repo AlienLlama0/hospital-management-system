@@ -1,32 +1,28 @@
 package service;
-import util.Input;
-import storage.DataManager;
-import model.Patient;
+
 import enums.BloodGroup;
+import model.Patient;
+import storage.DataManager;
+import util.Input;
 
-public class patientService {
+public class DoctorService {
     public static void create(){
-       System.out.println("Enter your name: ");
-       String name = Input.scanner.nextLine();
-       System.out.println("Enter your id: ");
-       String id = Input.scanner.nextLine();
-       System.out.println("Enter your age: ");
-       int age = Integer.parseInt(Input.scanner.nextLine());
-       System.out.println("Enter your phone: ");
-       String phone = Input.scanner.nextLine();
-       System.out.println("Enter your gender: ");
-       String gender = Input.scanner.nextLine();
-       System.out.println("Enter your symptom: ");
-       String symptom = Input.scanner.nextLine();
-       System.out.println("Enter your bloodgroup: ");
-       String blood = Input.scanner.nextLine();
-       BloodGroup bloodgroup = BloodGroup.valueOf(blood);
-       
-       Patient patient = new Patient(id,name,age,phone,gender,symptom, bloodgroup);
-       DataManager.addPatient(patient);
-       System.out.println("Patient id is created.\n");
-    }
+        System.out.println("Enter your name: ");
+        String name = Input.scanner.nextLine();
+        System.out.println("Enter your id: ");
+        String id = Input.scanner.nextLine();
+        System.out.println("Enter your age: ");
+        int age = Integer.parseInt(Input.scanner.nextLine());
+        System.out.println("Enter your phone: ");
+        String phone = Input.scanner.nextLine();
+        System.out.println("Enter your gender: ");
+        String gender = Input.scanner.nextLine();
+        System.out.println("Enter your specialization: ");
+        String specialization = Input.scanner.nextLine();
+        System.out.println("Enter your consultation_fee: ");
+        double consultation_fee = Double.parseDouble(Input.scanner.nextLine());
 
+    }
     public static void update(){
         System.out.println("Enter you id please: ");
         String id = Input.scanner.nextLine();
@@ -45,8 +41,8 @@ public class patientService {
         System.out.println("2.AGE");
         System.out.println("3.Phone");
         System.out.println("4.Gender");
-        System.out.println("5.Symptom");
-        System.out.println("6.Blood Group");
+        System.out.println("5.Specialization");
+        System.out.println("6.Consultation_fee");
 
         System.out.println("Enter your option: ");
         int option = Integer.parseInt(Input.scanner.nextLine());
@@ -68,18 +64,16 @@ public class patientService {
                 p.gender = gender;
                 break;
             case 5:
-                String symptom = Input.scanner.nextLine();
-                p.symptom = symptom;
+                String specialization = Input.scanner.nextLine();
+                p.specialization = specializtion;
                 break;
             case 6:
-                String blood = Input.scanner.nextLine();
-                p.bloodGroup = BloodGroup.valueOf(blood); 
+                String consultation_fee = Input.scanner.nextLine();
+                p.consultation_fee = consultation_fee; 
                 break;
             default:
-                System.out.println("Invalid option!");;
+                System.out.println("Invalid option!");
         }
-        DataManager.updatePatient(p);
-        System.out.println("Patient id is updated.\n");
     }
     public static void read(){
         System.out.println("Enter you id please: ");
@@ -113,5 +107,5 @@ public class patientService {
         }
         DataManager.deletePatient(id);
         System.out.println("id is deleted!!\n");
-    }
+    }t
 }
