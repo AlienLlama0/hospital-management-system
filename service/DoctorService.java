@@ -4,6 +4,8 @@ import enums.BloodGroup;
 import model.Patient;
 import storage.DataManager;
 import util.Input;
+import storage.DoctorRepository;
+import model.Doctor;
 
 public class DoctorService {
     public static void create(){
@@ -21,19 +23,23 @@ public class DoctorService {
         String specialization = Input.scanner.nextLine();
         System.out.println("Enter your consultation_fee: ");
         double consultation_fee = Double.parseDouble(Input.scanner.nextLine());
+        
+        Doctor doctor = new Doctor(id,name,age,phone,gender,specialization,consultation_fee);
+        DoctorRepository.addDoctor(doctor);
+        System.out.println("Doctor id is created.\n");
 
     }
     public static void update(){
         System.out.println("Enter you id please: ");
         String id = Input.scanner.nextLine();
-        Patient p = null;
-        for(int i = 0;i < DataManager.patientList.size();i++){
-            if(id.equals(DataManager.patientList.get(i).id)){
-                p = DataManager.patientList.get(i);
+        Doctor d = null;
+        for(int i = 0;i < DataManager.doctorList.size();i++){
+            if(id.equals(DataManager.doctorList.get(i).id)){
+                d = DataManager.doctorList.get(i);
                 break;
             }
         }
-        if(p == null){
+        if(d == null){
             System.out.println("Patient is not found");
             return;
         }
@@ -48,64 +54,72 @@ public class DoctorService {
         int option = Integer.parseInt(Input.scanner.nextLine());
         switch(option){
             case 1:
-                String name = Input.scanner.nextLine();
-                p.name = name;
+            System.out.println("Enter your name: ");    
+            String name = Input.scanner.nextLine();
+                d.name = name;
                 break;
             case 2:
-                int age = Integer.parseInt(Input.scanner.nextLine());
-                p.age = age;
+            System.out.println("Enter your age: ");     
+            int age = Integer.parseInt(Input.scanner.nextLine());
+                d.age = age;
                 break;
             case 3:
-                String phone = Input.scanner.nextLine();
-                p.phone = phone;
+            System.out.println("Enter your phone number: ");    
+            String phone = Input.scanner.nextLine();
+                d.phone = phone;
                 break;
             case 4:
-                String gender = Input.scanner.nextLine();
-                p.gender = gender;
+            System.out.println("Enter your gender: ");    
+            String gender = Input.scanner.nextLine();
+                d.gender = gender;
                 break;
             case 5:
-                String specialization = Input.scanner.nextLine();
-                p.specialization = specializtion;
+            System.out.println("Enter your specialization: ");    
+            String specialization = Input.scanner.nextLine();
+                d.specialization = specialization;
                 break;
             case 6:
-                String consultation_fee = Input.scanner.nextLine();
-                p.consultation_fee = consultation_fee; 
+            System.out.println("Enter your consultation_fee: ");    
+            double consultation_fee = Double.parseDouble(Input.scanner.nextLine());
+                d.consultation_fee = consultation_fee; 
                 break;
             default:
                 System.out.println("Invalid option!");
         }
+        DoctorRepository.updateDoctor(d);
+        System.out.println("Doctor id id updated.\n");
     }
     public static void read(){
         System.out.println("Enter you id please: ");
         String id = Input.scanner.nextLine();
-        Patient b = null;
-        for(int i = 0;i < DataManager.patientList.size();i++){
-            if(id.equals(DataManager.patientList.get(i).id)){
-                b = DataManager.patientList.get(i);
+        Doctor b = null;
+        for(int i = 0;i < DataManager.doctorList.size();i++){
+            if(id.equals(DataManager.doctorList.get(i).id)){
+                b = DataManager.doctorList.get(i);
                 break;
             }
         }
         if(b == null){
-            System.out.println("Patient is not found");
+            System.out.println("Doctor id is not found");
             return;
         }
-        DataManager.filterData(b);
+        DoctorRepository.doctorFilterData(b);
     }
     public static void delete(){
         System.out.println("Enter you id please: ");
         String id = Input.scanner.nextLine();
-        Patient c = null;
-        for(int i = 0;i < DataManager.patientList.size();i++){
-            if(id.equals(DataManager.patientList.get(i).id)){
-                c = DataManager.patientList.get(i);
+        Doctor c = null;
+        for(int i = 0;i < DataManager.doctorList.size();i++){
+            if(id.equals(DataManager.doctorList.get(i).id)){
+                c = DataManager.doctorList.get(i);
                 break;
             }
         }
         if(c == null){
-           System.out.println("Patient is not found");
+           System.out.println("Doctor id is not found.\n");
            return; 
         }
-        DataManager.deletePatient(id);
+        DoctorRepository.deleteDoctor(id);
         System.out.println("id is deleted!!\n");
-    }t
+    }
 }

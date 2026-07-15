@@ -32,7 +32,7 @@ public class DoctorRepository {
         }
     }
 
-    public void addDoctor(Doctor d){
+    public static void addDoctor(Doctor d){
         String sql = "INSERT INTO doctor(doctor_id, name, age, phone, gender, specialization, consultation_fee) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = Connect.getConnection();
@@ -55,7 +55,7 @@ public class DoctorRepository {
         }
     }
 
-    public void updateDoctor(Doctor d){
+    public static void updateDoctor(Doctor d){
         String sql = "UPDATE doctor SET name = ?, age = ?, phone = ?, gender = ?, specialization = ?, consultation_fee = ? WHERE doctor_id = ?";
 
         try (Connection conn = Connect.getConnection();
@@ -83,7 +83,7 @@ public class DoctorRepository {
         }
     }
 
-    public void deleteDoctor(String id){
+    public static void deleteDoctor(String id){
         String sql = "DELETE FROM doctor WHERE doctor_id = ?";
 
         try (Connection conn = Connect.getConnection();
