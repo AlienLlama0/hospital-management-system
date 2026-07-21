@@ -22,6 +22,9 @@ public class Mainmanu {
             case 2:
                 doctorMenu.menu();
                 break;
+            case 3:
+                roomMenu.menu();
+                break;
             default:
                 System.out.println("Invalid option");
 
